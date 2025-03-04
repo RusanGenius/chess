@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stockfish.js/10.0.2/stockfish.js"></script>
+</head>
+<body>
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <button onclick="startGame('friend')">Играть с другом</button>
+            <button onclick="showDifficulty()">Играть с компьютером</button>
+            <div class="difficulty-select" id="difficultySelect">
+                <input type="range" min="1" max="10" value="5" id="difficulty">
+                <button onclick="startGame('computer')">Старт (уровень <span id="level">5</span>)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="board-container">
+            <div class="coordinates vertical"></div>
+            <div class="coordinates horizontal"></div>
+            <div class="chess-board" id="board"></div>
+        </div>
+        <div class="material white"></div>
+        <div class="material black"></div>
+        <button class="flip-btn" onclick="flipBoard()">↻ Перевернуть</button>
+        <button class="undo-btn" onclick="undoMove()">↺ Отменить ход</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

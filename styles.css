@@ -1,0 +1,225 @@
+:root {
+    --dark-bg: #1a1a1a;
+    --light-text: #e6e6e6;
+    --accent: #4d4d4d;
+    --hover: #666666;
+    --board-border: #333333;
+    --square-dark: #404040;
+    --square-light: #737373;
+    --board-size: min(90vw, 80vh);
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background 0.3s;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.menu-overlay.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu-content {
+    transform: translateY(-20px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-content button {
+    background: var(--accent);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: transform 0.2s, background 0.2s;
+    display: block;
+    width: 200px;
+}
+
+.menu-content button:hover {
+    background: var(--hover);
+    transform: scale(1.05);
+}
+
+.difficulty-select {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.game-container {
+    position: relative;
+    display: none;
+}
+
+.board-container {
+    position: relative;
+    width: var(--board-size);
+    height: var(--board-size);
+}
+
+.chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--board-border);
+    background: var(--square-light);
+}
+
+.square {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    cursor: pointer;
+}
+
+.square.light { background: var(--square-light); }
+.square.dark { background: var(--square-dark); }
+.square.selected { background: #595959 !important; }
+
+.piece {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 10%;
+    pointer-events: none;
+}
+
+.dot {
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    left: 40%;
+    top: 40%;
+    pointer-events: none;
+}
+
+.coordinates {
+    position: absolute;
+    display: flex;
+    pointer-events: none;
+    font-size: 12px;
+    color: #666;
+}
+
+.coordinates.vertical {
+    right: calc(100% + 5px);
+    top: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.coordinates.horizontal {
+    bottom: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.coord {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coordinates {
+    position: absolute;
+    display: flex;
+    pointer-events: none;
+    font-size: 12px;
+    color: #666;
+    z-index: 1;
+}
+
+.coordinates.vertical {
+    right: calc(100% + 5px);
+    top: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.coordinates.horizontal {
+    bottom: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.material {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 500;
+    color: #666;
+    padding: 6px 12px;
+    border-radius: 4px;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: transform 0.6s ease-in-out;
+}
+
+.material.white {
+    bottom: calc(100% + 25px);
+    left: 94%;
+    transform: translateX(-50%);
+}
+
+.material.black {
+    top: calc(100% + 15px);
+    left: 94%;
+    transform: translateX(-50%);
+}
+
+.flip-btn, .undo-btn {
+    position: absolute;
+    bottom: -55px;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    z-index: 2;
+}
+
+.flip-btn { left: 45%; }
+.undo-btn { left: 0%; }
+
+.chess-board {
+    transition: transform 0.4s step-start;
+}
