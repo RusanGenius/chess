@@ -7,7 +7,6 @@ let isComputerThinking = false;
 let isBoardFlipped = false; // Добавлено состояние переворота
 const stockfish = new Worker('https://cdnjs.cloudflare.com/ajax/libs/stockfish.js/10.0.2/stockfish.js');
 
-// Функция переворота доски
 function flipBoard() {
     const board = document.getElementById('board');
     const coordinates = document.querySelectorAll('.coordinates');
@@ -15,21 +14,17 @@ function flipBoard() {
     
     isBoardFlipped = !isBoardFlipped;
     
-    // Анимация переворота
     board.style.transform = isBoardFlipped ? 'rotate(180deg)' : 'none';
     coordinates.forEach(coord => coord.style.transform = isBoardFlipped ? 'rotate(180deg)' : 'none');
     materials.forEach(material => material.style.transform = isBoardFlipped ? 'translateX(-50%) rotate(180deg)' : 'translateX(-50%)');
     
-    // Обновить доску с учётом переворота
     updateBoard();
 }
 
-// Обновлённый initBoard() с учётом переворота
 function initBoard() {
     const board = document.getElementById('board');
     board.innerHTML = '';
     
-    // Генерация клеток с учётом переворота
     for (let row = isBoardFlipped ? 0 : 7; isBoardFlipped ? row < 8 : row >= 0; isBoardFlipped ? row++ : row--) {
         for (let col = 0; col < 8; col++) {
             const square = document.createElement('div');
@@ -40,12 +35,10 @@ function initBoard() {
         }
     }
     
-    // Обновление координат
     document.querySelector('.horizontal').innerHTML = ['A','B','C','D','E','F','G','H'].map(l => `<div class="coord">${l}</div>`).join('');
     document.querySelector('.vertical').innerHTML = Array.from({length: 8}, (_, i) => `<div class="coord">${i + 1}</div>`).join('');
 }
 
-// Остальной код app.js остаётся без изменений (как в предыдущем ответе)
 
 function updateBoard() {
     const positions = game.board();
